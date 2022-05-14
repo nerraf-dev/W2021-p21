@@ -1,56 +1,61 @@
-from datetime import datetime as dt 
+from datetime import datetime
 
 times = ["08:00",	"09:00",	"10:00",	"11:00",	"12:00",	"13:00",	"14:00",	"15:00",	"16:00",	"17:00"]
 
-class Court:
-  def __init__(self):
-    # array = [time, availability, name, tel, code]
-    self.schedule = [["08:00","available","","",""],
-            ["09:00","available","","",""],
-            ["10:00","available","","",""],
-            ["11:00","available","","",""],
-            ["12:00","available","","",""],
-            ["13:00","available","","",""],
-            ["14:00","available","","",""],
-            ["15:00","available","","",""],
-            ["16:00","available","","",""],
-            ["17:00","available","","",""]
-           ]
-courts = []
-for i in range(0,8):
-  c = Court()
-  courts.append(c.schedule)
-  # print(courts[i])
-  # courts[i] = c.schedule
+def generateSchedule():
+  class Court:
+    def __init__(self):
+      # array = [time, availability, name, tel, code]
+      self.schedule = [["08:00","available","","",""],
+              ["09:00","available","","",""],
+              ["10:00","available","","",""],
+              ["11:00","available","","",""],
+              ["12:00","available","","",""],
+              ["13:00","available","","",""],
+              ["14:00","available","","",""],
+              ["15:00","available","","",""],
+              ["16:00","available","","",""],
+              ["17:00","available","","",""]
+             ]
+  courts = []
+  for i in range(7):
+    c = Court()
+    courts.append(c.schedule)
+  return courts
 
-while True:
-  date = dt.now()
-  day = date.strftime("%A")   #Get day as string
-  hour = date.strftime("%H")
-  minute = date.strftime("%M")
-  time = f"{hour}:{minute}" 
+class Date:
+  def __init__(self,dateTime):
+    self.date = dateTime
+    self.day = dateTime.strftime("%A")   #Get full day as string
+    self.dayNum = dateTime.strftime("%w") #Get day as number
+    self.hour = dateTime.strftime("%H")
+    self.minute = dateTime.strftime("%M")
+    
 
-  court1 = Court()
-  court2 = Court()
 
-  court1.schedule[0][1] = "Unavailable"
-
+date = Date(datetime.now())
+courts = generateSchedule()
   
-
+while True:
   print("""
 ****  Welcome to BSM Holiday Park ****
  --- SQUASH COURT BOOKING SYSTEM ---
 """)
-  print(f"Today is {day}. Current Time: {time}")
-  
+  print(f"Today is {date.day}. Current Time: {int(date.hour)+2}:{date.minute}")
+  print("To make a booking enter 'B'")
   command = input(">> ").upper()
   if command == "QUIT":
     break
-  else:
-    # print(f"Available)
-    # for item in schedule:
-    #   print(item)
-    # print(court1.schedule[0])
-    # print(court2.schedule[0])
+  elif command == "ADMIN":
+    print("*** ADMIN ***")
+    command = input(">> ").upper()
+    if command == "QUIT":
+      break
+  elif command == "B":
     print(f"{courts[0][0]}")
-    
+
+    # c = 0
+    # for i in courts:
+    #   print(f"day: {c} - {i}")
+    #   print("--------------")
+    #   c+=1
