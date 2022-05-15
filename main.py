@@ -5,7 +5,7 @@ times = ["08:00",	"09:00",	"10:00",	"11:00",	"12:00",	"13:00",	"14:00",	"15:00",
 
 def generateSchedule(day):
   class Court:
-    def __init__(self, day):
+    def __init__(self, n, day):
       self.day = day
       # array = [time, availability, name, tel, code]
       self.schedule = [["08:00","Y","","",""],
@@ -24,16 +24,20 @@ def generateSchedule(day):
   #Each court object with the schedule array is stored in a dictionary. 
   #The day name is used as the key.
   for d in ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]:  #Alt - list(calendar.day_name)
-    c = Court(d)
+  for n in range(8):
+    c = Court(n, day)
     courts[d] = c.schedule
   return courts
 
 #MAKE BOOKING FUNCTION
 def MakeBooking():
   time = f"{hour}:00"
+  print("** AVAILABLE TIMES **")
   for i in courts[day]:
     if i[1] == "Y":
-      print(f"{day.upper()}: {i}")
+      # print(f"{day.upper()}: {i}")
+      print(f"{i[0]}")
+  
   
 
 # *** Setup ***
