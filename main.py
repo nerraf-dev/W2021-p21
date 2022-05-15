@@ -28,21 +28,29 @@ def generateSchedule(day):
     courts[d] = c.schedule
   return courts
 
+#MAKE BOOKING FUNCTION
+def MakeBooking():
+  time = f"{hour}:00"
+  for i in courts[day]:
+    if i[1] == "Y":
+      print(f"{day.upper()}: {i}")
+  
 
-# Initialise the data structure
-# date = Date(datetime.now())
-# TESTING: Set the date to Tuesday 10 May 2020 08:05:23
-date = datetime(2022, 5, 10, 8,5,23)
+# *** Setup ***
+# date = datetime.now()
+# TESTING: Set the date to Monday 9th May 2020 08:05:23
+date = datetime(2022, 5, 9, 8,5,23)
+
+#Split time data
 day = date.strftime("%A")   #Get full day as string
 dayNum = date.strftime("%w") #Get day as number
 hour = date.strftime("%H")
 minute = date.strftime("%M")
 
+#Setup the court schedule arrays
 courts = generateSchedule(day)
 
-# TESTING
-# hour = "07"
-  
+# MAIN
 while True:
   print("""
 ****  Welcome to BSM Holiday Park ****
@@ -66,12 +74,9 @@ while True:
       # print(courts)
       # print(courts.keys())
       print(f"{courts[day][0]}")
+      
+      MakeBooking()
 
-      # CHECK DICTIONARY IS BUILT
-      # for item in courts:
-      #   # print(item)
-      #   print(f"DAY: {item} - {courts[item]}")
-      #   print("---------")
-      #   ***END***
+      
 
-      time = hour
+      
